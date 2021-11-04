@@ -35,7 +35,18 @@ public class OrderTest {
     }
 
     @Test
-    void shouldTest1() {
+    void shouldTest1() throws InterruptedException {
         driver.get("http://localhost:9999");
+        Thread.sleep (1000);
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Александра");
+        Thread.sleep (1000);
+        driver.findElement(By.cssSelector("[data-test-id=phone] input ")).sendKeys("+79999999998");
+        Thread.sleep (1000);
+        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
+        Thread.sleep (1000);
+        driver.findElement(By.cssSelector("[type='button']")).click();
+        Thread.sleep (1000);
+        String text = driver.findElement(By.cssSelector("[data-test-id=order-success]")).getText();
+        assertEquals("  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", text);
     }
 }
